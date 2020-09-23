@@ -3,13 +3,15 @@ defmodule TransformMap do
   Documentation for TransformMap.
   """
 
+  require Decimal
+
   def now do
     DateTime.utc_now()
     |> DateTime.to_unix(:microseconds)
   end
 
   defp convert_decimal(value) do
-    case Decimal.decimal?(value) do
+    case Decimal.is_decimal(value) do
       true ->
         value
         |> Decimal.to_float()
